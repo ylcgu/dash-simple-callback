@@ -3,6 +3,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import plotly.graph_objs as go
 from dash.dependencies import Input, Output, State
+from collections import deque, Counter
 
 ########### Define your variables ######
 
@@ -11,8 +12,30 @@ tabtitle = 'racecar'
 sourceurl = 'https://codereview.stackexchange.com/questions/25679/create-palindrome-by-rearranging-letters-of-a-word'
 githublink = 'https://github.com/austinlasseter/dash-simple-callback'
 
+########### Define a cool function
+# Hat tip! https://codereview.stackexchange.com/users/1659/winston-ewert
 
-########## Set up the chart
+def palindrome_from(letters):
+    """
+    Forms a palindrome by rearranging :letters: if possible,
+    throwing a :ValueError: otherwise.
+    :param letters: a suitable iterable, usually a string
+    :return: a string containing a palindrome
+    """
+    counter = Counter(letters)
+    sides = []
+    center = deque()
+    for letter, occurrences in counter.items():
+        repetitions, odd_count = divmod(occurrences, 2)
+        if not odd_count:
+            sides.append(letter * repetitions)
+            continue
+        if center:
+            return "no palindrome exists for '{}'".format(letters)
+        center.append(letter * occurrences)
+    center.extendleft(sides)
+    center.extend(sides)
+    return ''.join(center)
 
 ########### Initiate the app
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -41,7 +64,8 @@ app.layout = html.Div(children=[
     [Input(component_id='my-id', component_property='value')]
 )
 def update_output_div(input_value):
-    return 'You\'ve entered "{}"'.format(input_value)
+    palin=palindrome_from(input_value)
+    return f"You've entered '{input_value}', and your output is '{palin}'"
 
 ############ Deploy
 if __name__ == '__main__':
