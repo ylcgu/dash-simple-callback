@@ -7,13 +7,10 @@ from collections import deque, Counter
 
 ########### Define your variables ######
 
-myheading1='Try out a palindrome here!'
-initial_value='A nut for a jar of tuna'
+myheading1='How do you feel today!'
+initial_value='Feel free to tell me'
 longtext='''
-        _Suggestions you might try:_
-        * A man, a plan, a canal: Panama!
-        * Go hang a salami I'm a lasanga hog
-        * God! Nate bit a Tibetan dog!
+        Here is a magic box of emotions
         '''
 tabtitle = 'racecar'
 sourceurl = 'https://www.grammarly.com/blog/16-surprisingly-funny-palindromes/'
@@ -21,7 +18,7 @@ githublink = 'https://github.com/austinlasseter/dash-simple-callback'
 
 ########### Define a function for your callback:
 def my_function(letters):
-    return(letters[::-1])
+    return(letters[::-3])
 
 ########### Initiate the app
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -51,7 +48,7 @@ app.layout = html.Div(children=[
 )
 def update_output_div(input_value):
     palin=my_function(input_value)
-    return f"You've entered '{input_value}', and your output is '{palin}'"
+    return f"You've entered '{input_value}', and your output is '{happy}'"
 
 ############ Deploy
 if __name__ == '__main__':
