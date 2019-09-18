@@ -16,7 +16,7 @@ longtext='''
         * God! Nate bit a Tibetan dog!
         '''
 tabtitle = 'racecar'
-sourceurl = 'https://codereview.stackexchange.com/questions/25679/create-palindrome-by-rearranging-letters-of-a-word'
+sourceurl = 'https://www.grammarly.com/blog/16-surprisingly-funny-palindromes/'
 githublink = 'https://github.com/austinlasseter/dash-simple-callback'
 
 ########### Define a function for your callback:
