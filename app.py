@@ -8,38 +8,20 @@ from collections import deque, Counter
 ########### Define your variables ######
 
 myheading1='Try out a palindrome here!'
+initial_value='A nut for a jar of tuna'
+longtext='''
+        _Suggestions you might try:_
+        * A man, a plan, a canal: Panama!
+        * Go hang a salami I'm a lasanga hog
+        * God! Nate bit a Tibetan dog!
+        '''
 tabtitle = 'racecar'
 sourceurl = 'https://codereview.stackexchange.com/questions/25679/create-palindrome-by-rearranging-letters-of-a-word'
 githublink = 'https://github.com/austinlasseter/dash-simple-callback'
 
+########### Define a function for your callback:
 def my_function(letters):
     return(letters[::-1])
-
-
-########### Define a cool function for palindromes
-# Hat tip! https://codereview.stackexchange.com/users/1659/winston-ewert
-
-# def my_function(letters):
-#     """
-#     Forms a palindrome by rearranging :letters: if possible,
-#     throwing a :ValueError: otherwise.
-#     :param letters: a suitable iterable, usually a string
-#     :return: a string containing a palindrome
-#     """
-#     counter = Counter(letters)
-#     sides = []
-#     center = deque()
-#     for letter, occurrences in counter.items():
-#         repetitions, odd_count = divmod(occurrences, 2)
-#         if not odd_count:
-#             sides.append(letter * repetitions)
-#             continue
-#         if center:
-#             return "no palindrome exists for '{}'".format(letters)
-#         center.append(letter * occurrences)
-#     center.extendleft(sides)
-#     center.extend(sides)
-#     return ''.join(center)
 
 ########### Initiate the app
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -51,16 +33,9 @@ app.title=tabtitle
 
 app.layout = html.Div(children=[
     html.H1(myheading1),
-    html.Div([dcc.Markdown('''
-            _Suggestions you might try:_
-            * A man, a plan, a canal: Panama!
-            * Go hang a salami I'm a lasanga hog
-            * God! Nate bit a Tibetan dog!
-            ''')]),
-
-    dcc.Input(id='my-id', value='initial value', type='text'),
+    html.Div(children=[dcc.Markdown(longtext)]),
+    dcc.Input(id='my-id', value=initial_value, type='text'),
     html.Div(id='my-div'),
-    # html.Div(id='your_output_here', children=''),
     html.Br(),
     html.A('Code on Github', href=githublink),
     html.Br(),
